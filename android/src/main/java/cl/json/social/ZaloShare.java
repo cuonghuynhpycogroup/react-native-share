@@ -13,7 +13,7 @@ public class ZaloShare extends SingleShareIntent {
     private static final String PACKAGE = "com.zing.zalo";
     private static final String DEFAULT_WEB_LINK = "https://developers.zalo.me/docs/social/share";
 
-    public FacebookShare(ReactApplicationContext reactContext) {
+    public ZaloShare(ReactApplicationContext reactContext) {
         super(reactContext);
 
     }
