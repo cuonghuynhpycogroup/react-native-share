@@ -16,11 +16,8 @@
     NSLog(@"Try open view");
     
     if ([options objectForKey:@"message"] && [options objectForKey:@"message"] != [NSNull null]) {
-        NSString *text = [RCTConvert NSString:options[@"message"]];
-        text = [text stringByAppendingString: [@" " stringByAppendingString: options[@"url"]] ];
-        text = (NSString*)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef) text, NULL,CFSTR("!*'();:@&=+$,/?%#[]"),kCFStringEncodingUTF8));
         
-        NSString * urlWhats = [NSString stringWithFormat:@"zalo://send?text=%@", text];
+        NSString * urlWhats = [NSString stringWithFormat:@"zalo://send?text="];
         NSURL * whatsappURL = [NSURL URLWithString:urlWhats];
         
         if ([[UIApplication sharedApplication] canOpenURL: whatsappURL]) {
@@ -28,7 +25,7 @@
             successCallback(@[]);
         } else {
             // Cannot open whatsapp
-            NSString *stringURL = @"https://itunes.apple.com/app/whatsapp-messenger/id310633997";
+            NSString *stringURL = @"https://zalo.me";
             NSURL *url = [NSURL URLWithString:stringURL];
             [[UIApplication sharedApplication] openURL:url];
             
