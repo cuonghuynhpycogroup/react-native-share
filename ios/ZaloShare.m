@@ -17,7 +17,7 @@
     
     if ([options objectForKey:@"message"] && [options objectForKey:@"message"] != [NSNull null]) {
         
-        NSString * urlWhats = [NSString stringWithFormat:@"zalo://share"];
+        NSString * urlWhats = [NSString stringWithFormat:@"zaloshareext://shareext?url=abc.xyz&type=8&version=1"];
         NSURL * whatsappURL = [NSURL URLWithString:urlWhats];
         
         if ([[UIApplication sharedApplication] canOpenURL: whatsappURL]) {
@@ -25,7 +25,7 @@
             successCallback(@[]);
         } else {
             // Cannot open whatsapp
-            NSString *stringURL = @"zalo://share";
+            NSString *stringURL = @"zaloshareext://shareext?url=abc.xyz&type=8&version=1";
             NSURL *url = [NSURL URLWithString:stringURL];
             [[UIApplication sharedApplication] openURL:url];
             
