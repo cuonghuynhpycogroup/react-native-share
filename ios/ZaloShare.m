@@ -18,13 +18,8 @@
         
         NSURL *zaloURL = [NSURL URLWithString:url];
     
-        if ([[UIApplication sharedApplication] canOpenURL: zaloURL]) {
-            [[UIApplication sharedApplication] openURL:zaloURL];
-            successCallback(@[]);
-        } else {
-            // Cannot open zalo
-            NSLog(@"error web intent");
-        }
+        [[UIApplication sharedApplication] openURL:zaloURL];
+        successCallback(@[]);
     }
 }
 
