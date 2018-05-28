@@ -2,8 +2,6 @@
 //  ZaloShare.m
 //  RNShare
 //
-//  Created by Diseño Uno BBCL on 23-07-16.
-//  Copyright © 2016 Facebook. All rights reserved.
 //
 
 #import "ZaloShare.h"
@@ -15,29 +13,18 @@
     
     NSLog(@"Try open view");
     
-    if ([options objectForKey:@"message"] && [options objectForKey:@"message"] != [NSNull null]) {
+    if ([options objectForKey:@"url"] && [options objectForKey:@"url"] != [NSNull null]) {
+        NSString *url = [NSString stringWithFormat:@"zaloshareext://shareext?url=%@&type=8&version=1”", options[@"url"]];
+        NSURL *zaloURL = [NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
-        NSString * urlWhats = [NSString stringWithFormat:@"zaloshareext://shareext?url=abc.xyz&type=8&version=1"];
-        NSURL * whatsappURL = [NSURL URLWithString:urlWhats];
-        
-        if ([[UIApplication sharedApplication] canOpenURL: whatsappURL]) {
-            [[UIApplication sharedApplication] openURL: whatsappURL];
+        if ([[UIApplication sharedApplication] canOpenURL: zaloURL]) {
+            [[UIApplication sharedApplication] openURL:zaloURL];
             successCallback(@[]);
         } else {
-            // Cannot open whatsapp
-            NSString *stringURL = @"zaloshareext://shareext?url=abc.xyz&type=8&version=1";
-            NSURL *url = [NSURL URLWithString:stringURL];
-            [[UIApplication sharedApplication] openURL:url];
-            
-            NSString *errorMessage = @"Not installed";
-            NSDictionary *userInfo = @{NSLocalizedFailureReasonErrorKey: NSLocalizedString(errorMessage, nil)};
-            NSError *error = [NSError errorWithDomain:@"com.rnshare" code:1 userInfo:userInfo];
-            
-            NSLog(errorMessage);
-            failureCallback(error);
+            // Cannot open gplus
+            NSLog(@"error web intent");
         }
     }
-    
 }
 
 
