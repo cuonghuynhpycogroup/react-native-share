@@ -16,10 +16,15 @@
     if ([options objectForKey:@"url"] && [options objectForKey:@"url"] != [NSNull null]) {
         NSString *url = [NSString stringWithFormat:@"zaloshareext://shareext?url=%@&type=8&version=1",options[@"url"]];
         
-        NSURL *zaloURL = [NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        
-        [[UIApplication sharedApplication] openURL:zaloURL];
-        successCallback(@[]);
+        NSURL *zaloURL = [NSURL URLWithString:url];
+    
+        if ([[UIApplication sharedApplication] canOpenURL: zaloURL]) {
+            [[UIApplication sharedApplication] openURL:zaloURL];
+            successCallback(@[]);
+        } else {
+            // Cannot open zalo
+            NSLog(@"error web intent");
+        }
     }
 }
 
